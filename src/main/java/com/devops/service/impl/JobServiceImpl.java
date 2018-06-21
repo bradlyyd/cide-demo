@@ -4,8 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +23,6 @@ import com.devops.extraUtil.JobUtil;
 import com.devops.extraUtil.WorkFlowUtil;
 import com.devops.mapper.JobMapper;
 import com.devops.service.IJobService;
-import com.surenpi.jenkins.client.job.BuildDetail;
 
 /**
  *
