@@ -4,7 +4,7 @@ public class PathGitHubConstant {
 	/**
 	 * GIT  GITHUB path CONFIG
 	 */
-	public static String  GIT_USER_NAME="szjack";
+	public static String  GIT_USER_NAME="bradlyyd";
 	public static String  GIT_LOCAL_PATH_BASE="/home/git/";
 	public static String  GIT_SSH_PATH="~/.ssh/config";
 	public static String  GIT_GITHUB_URL="https://GITHUB.com/";
