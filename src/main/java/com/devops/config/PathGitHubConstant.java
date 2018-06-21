@@ -32,7 +32,7 @@ public class PathGitHubConstant {
 	/**
 	 * TOKEN CONFIG
 	 */
-	public static String TOKEN_GITHUB="5e9f2eaf9a572b54af3d6607e42a08b3";
+	public static String TOKEN_GITHUB="b763ced986838c657ce499a306129d1164f577fa";
 	/**
 	 *  API URL path CONFIG
 	 */
