@@ -1,0 +1,20 @@
+<#include "/common/layout.html">
+<@header>
+</@header>
+<@body>
+<div class="content-wrapper">
+  <!-- Main content -->
+  <section class="content">
+    <div class="error-page">
+       <div>
+        <h2 class="headline text-yellow">  <i class="fa fa-warning text-yellow"></i> illegalAccess</h2>
+        <p> Resource address: <a href="${url!}">${url!}</a>.
+        <p> You don't have the access permission. You can click here <a href="/index.html">back to Home Page </a>or refresh the page to retry!
+        </p>
+      </div><!-- /.error-content -->
+    </div><!-- /.error-page -->
+  </section><!-- /.content -->
+</div><!-- /.content-wrapper -->
+</@body>
+<@footer>
+</@footer>

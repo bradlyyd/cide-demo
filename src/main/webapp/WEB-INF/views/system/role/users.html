@@ -1,0 +1,23 @@
+<#include "/common/layout_dl.html">
+<@header>
+</@header>
+<@body>
+ <table class="table table-hover">
+  <tr>
+    <th>User Name</th>
+    <th>Description</th>
+    <th>Create Date&Time</th>
+    <th>Status</th>
+  </tr>
+  <#list users as user>
+  	  <tr>
+     <td>${(user.userName)!}</td>
+     <td>${(user.userDesc)!'--'}</td>
+     <td>${(user.createTime?string('yyyy/MM/dd HH:mm:ss'))!}</td>
+     <td><#if user.userState==1>Enabled<#else><font color="red">Disabled</font></#if></td>
+   </tr>
+  </#list>
+</table>
+</@body>
+<@footer>
+</@footer>
