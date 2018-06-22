@@ -43,6 +43,7 @@ public class JobUtil {
         List<Job> list = jobs.getAllJobs();
        
     }
+    
     public static void getLogTexts(String name ,Integer buildNum)throws Exception {
     	if(jobs==null) JobUtil.init();
        String logs=	jobs.getLogText(name, buildNum);
