@@ -80,6 +80,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 		this.deleteById(id); 
 		
 		try {
+		JobUtil.batchDel(jobName);
 		HttpClientUtil.deleteGiteeRepo(jobName);
 		}catch (Exception e) {
 
