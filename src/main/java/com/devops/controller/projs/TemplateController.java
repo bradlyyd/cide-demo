@@ -98,7 +98,7 @@ public class TemplateController extends SuperController{
     @RequiresPermissions("editTemplate")
     @RequestMapping("/doEdit")  
     @ResponseBody
-    public  Rest doEdit(Template tpl,Model model){
+    public  Rest doEdit(Template tpl,Model model) throws Exception{
     	templateService.updateTemplate(tpl);
     	return Rest.ok();
     } 

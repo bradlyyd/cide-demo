@@ -72,6 +72,10 @@ public class JobUtil {
     	}
 
     }
+    public static void update (String jobName,String jobXml)throws Exception{
+    	if(jobs==null) JobUtil.init();
+        jobs.update(jobName, jobXml);
+    }
 
     public static void create(String name) throws Exception
     {

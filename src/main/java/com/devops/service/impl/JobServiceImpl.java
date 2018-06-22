@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.kohsuke.github.GHCreateRepositoryBuilder;
+import org.kohsuke.github.GitHub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.devops.config.PathConstant;
+import com.devops.config.PathGitHubConstant;
 import com.devops.entity.JenkinsJob;
 import com.devops.entity.Template;
 import com.devops.extraUtil.FreemarkerUtil;
@@ -49,9 +52,16 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 		}
 
 		try {
-			HttpClientUtil.createGiteeRepo(job.getJobName());
+			//HttpClientUtil.createGiteeRepo(job.getJobName());
+			GitHub github = GitHub.connect("bradlyyd",PathGitHubConstant.TOKEN_GITHUB);
+			
+			GHCreateRepositoryBuilder g= github.createRepository(job.getJobName());
+			g.create();
+			
+			
 			GitUtil.cloneAndPush(tpl.getTemplateName(), job.getJobName());
 		} catch (Exception e) {
+			e.printStackTrace();
 			JobUtil.batchDel(job.getJobName());
 
 			throw e;
@@ -67,7 +77,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 	@Transactional
 	public void delete(Integer id, String jobName) throws Exception {
 		// TODO Auto-generated method stub
-		this.deleteById(id);
+		this.deleteById(id); 
 		
 		try {
 		HttpClientUtil.deleteGiteeRepo(jobName);
@@ -81,8 +91,17 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 
 
 	@Override
-	public void updateJob(JenkinsJob job) {
+	public void updateJob(JenkinsJob job) throws Exception{
 		// TODO Auto-generated method stub
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		data.put("pipelineScript", job.getPipelineScript().replaceAll("'", "&apos;"));
+		String xml = FreemarkerUtil.getConfigXml(data);
+		try {
+			JobUtil.update(job.getJobName(), xml);
+		} catch (Exception e) {
+			throw e;
+		}
 		job.setUpdated(new Date());
 		jobMapper.updateById(job);
 

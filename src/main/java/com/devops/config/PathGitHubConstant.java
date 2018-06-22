@@ -32,15 +32,15 @@ public class PathGitHubConstant {
 	/**
 	 * TOKEN CONFIG
 	 */
-	public static String TOKEN_GITHUB="b763ced986838c657ce499a306129d1164f577fa";
+	public static String TOKEN_GITHUB="c953fc5ca52210ec3598a4281fee01ffcbfbedd5";
 	/**
 	 *  API URL path CONFIG
 	 */
-	public static String API_GITHUB_CREATE_REPO="https://GITHUB.com/api/v5/user/repos";
+	public static String API_GITHUB_CREATE_REPO="http://api.github.com/user/repos";
 	
 	public static String API_GITHUB_DELETE_REPO="https://GITHUB.com/api/v5/repos/"+GIT_USER_NAME+"/";
 	
-	/**
+	/** 
 	 * COMMON API 
 	 */
 	public  static String API_CREATE_REPO=API_GITHUB_CREATE_REPO;

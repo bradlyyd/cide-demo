@@ -143,7 +143,7 @@ public class JobController extends SuperController{
     @RequiresPermissions("editJob")
     @RequestMapping("/doEdit")  
     @ResponseBody
-    public  Rest doEdit(JenkinsJob job,Model model){
+    public  Rest doEdit(JenkinsJob job,Model model)throws Exception{
     	jobService.updateJob(job);
     	return Rest.ok();
     } 

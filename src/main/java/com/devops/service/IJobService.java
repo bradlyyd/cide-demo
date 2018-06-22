@@ -18,7 +18,7 @@ public interface IJobService extends IService<JenkinsJob> {
 	
 	
 	public void insertJob(JenkinsJob job,Template tpl)throws Exception ;
-	public void updateJob(JenkinsJob job) ;
+	public void updateJob(JenkinsJob job) throws Exception;
 	void delete(Integer id,String jobName)throws Exception;
 	void build(JenkinsJob job)throws Exception;
 	public void doBuild(JenkinsJob job);

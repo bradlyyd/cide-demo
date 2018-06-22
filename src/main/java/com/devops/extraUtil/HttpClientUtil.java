@@ -5,7 +5,6 @@ import java.net.URI;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -22,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.devops.config.PathConstant;
+import com.devops.config.PathGitHubConstant;
 
 
 
@@ -34,6 +34,7 @@ public class HttpClientUtil {
     private static final Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
     
     public  static String token=PathConstant.TOKEN_GITEE;
+    public  static String githubToken=PathGitHubConstant.TOKEN_GITHUB;
     public static void main(String[] args) throws Exception{
     
 	
@@ -54,6 +55,21 @@ public class HttpClientUtil {
     		throw e1;
     	}
     }
+    public static void createGitHubRepo(String repoName)throws Exception{
+    	
+    	
+    	try {
+	    	HttpClientUtil hc=new HttpClientUtil();
+			List<NameValuePair> params=new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("name", repoName));
+			params.add(new BasicNameValuePair("Authorization: token", HttpClientUtil.githubToken));
+			hc.executeByPOST(PathGitHubConstant.API_GITHUB_CREATE_REPO, params);
+    	}catch (Exception e) {
+    		Exception e1= new  Exception ("github repo create error:"+e.getMessage());
+    		e1.setStackTrace(e.getStackTrace());
+    		throw e1;
+    	}
+    }
     
     public static void  deleteGiteeRepo(String repoName) throws Exception{
     	try {
@@ -70,16 +86,16 @@ public class HttpClientUtil {
     	}
     }
     /**
-     * 初始化HttpClient
+     * 鍒濆鍖朒ttpClient
      */
     private CloseableHttpClient httpClient = HttpClients.createDefault();
     
     /**
-     * POST方式调用
+     * POST鏂瑰紡璋冪敤
      * 
      * @param url
-     * @param params 参数为NameValuePair键值对对象
-     * @return 响应字符串
+     * @param params 鍙傛暟涓篘ameValuePair閿�煎瀵硅薄
+     * @return 鍝嶅簲瀛楃涓�
      * @throws Exception 
      * @throws java.io.UnsupportedEncodingException
      */
@@ -97,11 +113,11 @@ public class HttpClientUtil {
         
             responseJson = httpClient.execute(post, responseHandler);
             
-            System.out.println("HttpClient POST请求结果：" + responseJson);
+            System.out.println("HttpClient POST璇锋眰缁撴灉锛�" + responseJson);
         }
         catch (ClientProtocolException e) {
             e.printStackTrace();
-            System.out.println("HttpClient POST请求异常：" + e.getMessage());
+            System.out.println("HttpClient POST璇锋眰寮傚父锛�" + e.getMessage());
             throw e;
         }
         catch (IOException e) {
@@ -115,11 +131,11 @@ public class HttpClientUtil {
     }
     
     /**
-     * Get方式请求
+     * Get鏂瑰紡璇锋眰
      * 
-     * @param url 带参数占位符的URL，例：http://ip/User/user/center.aspx?_action=GetSimpleUserInfo&codes={0}&email={1}
-     * @param params 参数值数组，需要与url中占位符顺序对应
-     * @return 响应字符串
+     * @param url 甯﹀弬鏁板崰浣嶇鐨刄RL锛屼緥锛歨ttp://ip/User/user/center.aspx?_action=GetSimpleUserInfo&codes={0}&email={1}
+     * @param params 鍙傛暟鍊兼暟缁勶紝闇�瑕佷笌url涓崰浣嶇椤哄簭瀵瑰簲
+     * @return 鍝嶅簲瀛楃涓�
      * @throws Exception 
      * @throws java.io.UnsupportedEncodingException
      */
@@ -130,17 +146,17 @@ public class HttpClientUtil {
         String responseJson = null;
         try {
             responseJson = httpClient.execute(get, responseHandler);
-            log.info("HttpClient GET请求结果：" + responseJson);
+            log.info("HttpClient GET璇锋眰缁撴灉锛�" + responseJson);
             
         }
         catch (ClientProtocolException e) {
             e.printStackTrace();
-            log.error("HttpClient GET请求异常：" + e.getMessage());
+            log.error("HttpClient GET璇锋眰寮傚父锛�" + e.getMessage());
             throw e;
         }
         catch (IOException e) {
             e.printStackTrace();
-            log.error("HttpClient GET请求异常：" + e.getMessage());
+            log.error("HttpClient GET璇锋眰寮傚父锛�" + e.getMessage());
             throw e;
         }
         finally {
@@ -162,15 +178,15 @@ public class HttpClientUtil {
         String responseJson = null;
         try {
             responseJson = httpClient.execute(get, responseHandler);
-            log.info("HttpClient GET请求结果：" + responseJson);
+            log.info("HttpClient GET璇锋眰缁撴灉锛�" + responseJson);
         }
         catch (ClientProtocolException e) {
             e.printStackTrace();
-            log.error("HttpClient GET请求异常：" + e.getMessage());
+            log.error("HttpClient GET璇锋眰寮傚父锛�" + e.getMessage());
         }
         catch (IOException e) {
             e.printStackTrace();
-            log.error("HttpClient GET请求异常：" + e.getMessage());
+            log.error("HttpClient GET璇锋眰寮傚父锛�" + e.getMessage());
         }
         finally {
             httpClient.close();
@@ -180,11 +196,11 @@ public class HttpClientUtil {
     
  
     /**
-     * delete方式调用
+     * delete鏂瑰紡璋冪敤
      * 
      * @param url
-     * @param params 参数为NameValuePair键值对对象
-     * @return 响应字符串
+     * @param params 鍙傛暟涓篘ameValuePair閿�煎瀵硅薄
+     * @return 鍝嶅簲瀛楃涓�
      * @throws Exception 
      * @throws java.io.UnsupportedEncodingException
      */
@@ -202,7 +218,7 @@ public class HttpClientUtil {
         
             responseJson = httpClient.execute(httpdelete, responseHandler);
             
-            System.out.println("HttpClient POST请求结果：" + responseJson);
+            System.out.println("HttpClient POST璇锋眰缁撴灉锛�" + responseJson);
         }
         catch (ClientProtocolException e) {
             e.printStackTrace();

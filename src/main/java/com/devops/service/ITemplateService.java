@@ -13,7 +13,7 @@ public interface ITemplateService extends IService<Template> {
 	
 	
 	public void insertTemplate(Template tpl)throws Exception ;
-	public void updateTemplate(Template tpl) ;
+	public void updateTemplate(Template tpl)throws Exception ;
 	void delete(Integer id);
 	Page<Map<Object, Object>> selectTemplatePage(Page<Map<Object, Object>> page, String search);
 }
