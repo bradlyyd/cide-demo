@@ -33,7 +33,7 @@ public class HttpClientUtil {
     
     private static final Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
     
-    public  static String token=PathConstant.TOKEN_GITEE;
+    public  static String token=PathConstant.TOKEN_GITHUB;
     public  static String githubToken=PathGitHubConstant.TOKEN_GITHUB;
     public static void main(String[] args) throws Exception{
     
