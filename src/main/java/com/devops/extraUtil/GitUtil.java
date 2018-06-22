@@ -34,7 +34,7 @@ public class GitUtil {
 	  }
 	 
 	  /**
-	   * 克隆url 到本地目录
+	   * 鍏嬮殕url 鍒版湰鍦扮洰褰�
 	   */
 	  public static Boolean gitClone(String repoName) throws Exception{
 		  try{
@@ -52,7 +52,7 @@ public class GitUtil {
 		  return true;
 	  }
 	 /** 
-	  * 推送本地代码到远程地址库
+	  * 鎺ㄩ�佹湰鍦颁唬鐮佸埌杩滅▼鍦板潃搴�
 	  */
 	  public static Boolean gitPushOtherRemote (String oldRepoName ,String repoName )throws Exception {
 		  org.eclipse.jgit.transport.SshSessionFactory sshSessionFactory = new org.eclipse.jgit.transport.JschConfigSessionFactory() {
@@ -74,7 +74,7 @@ public class GitUtil {
 			//ps.setCredentialsProvider( new UsernamePasswordCredentialsProvider( "@163.com", "" ) );
 			//ps.setCredentialsProvider( new UsernamePasswordCredentialsProvider( "token", "Gwh7LiFSY23qeiWJyesh" ) );
 			//
-			ps.setRemote(PathConstant.GIT_GITEE_AUTHOR_USER+repoName+".git");
+			ps.setRemote(PathConstant.GIT_GITHUB_AUTHOR_USER+repoName+".git");
 			//ps.setRemote("https://gitee.com/szbrad/fffff.git");
 			ps.setTransportConfigCallback( new org.eclipse.jgit.api.TransportConfigCallback() {
 				  @Override
@@ -94,7 +94,7 @@ public class GitUtil {
 	  }
 	 
 	    /**
-	     * 新建一个分支并同步到远程仓库
+	     * 鏂板缓涓�涓垎鏀苟鍚屾鍒拌繙绋嬩粨搴�
 	     * @param branchName
 	     * @throws IOException
 	     * @throws GitAPIException
@@ -108,7 +108,7 @@ public class GitUtil {
 	        	git= Git.cloneRepository()
 	        	  .setURI(PathConstant.GIT_AUTHOR_PRE +gitUri) //"https://github.com/eclipse/jgit.git" )
 	        	  .call();    
-	            //检查新建的分支是否已经存在，如果存在则将已存在的分支强制删除并新建一个分支
+	            //妫�鏌ユ柊寤虹殑鍒嗘敮鏄惁宸茬粡瀛樺湪锛屽鏋滃瓨鍦ㄥ垯灏嗗凡瀛樺湪鐨勫垎鏀己鍒跺垹闄ゅ苟鏂板缓涓�涓垎鏀�
 	            List<Ref> refs = git.branchList().call();
 	            for (Ref ref : refs) {
 	                if (ref.getName().equals(newBranchIndex)) {
@@ -118,9 +118,9 @@ public class GitUtil {
 	                    break;
 	                }
 	            }            
-	            //新建分支
+	            //鏂板缓鍒嗘敮
 	            Ref ref = git.branchCreate().setName(branchName).call();
-	            //推送到远程
+	            //鎺ㄩ�佸埌杩滅▼
 	            git.push().add(ref).call();
 	            gitPathURI = PathConstant.GIT_AUTHOR_PRE + " " + "feature/" + branchName;
 	        }catch (GitAPIException e) {

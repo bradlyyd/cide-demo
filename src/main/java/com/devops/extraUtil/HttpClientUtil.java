@@ -21,7 +21,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.devops.config.PathConstant;
-import com.devops.config.PathGitHubConstant;
 
 
 
@@ -34,7 +33,7 @@ public class HttpClientUtil {
     private static final Logger log = LoggerFactory.getLogger(HttpClientUtil.class);
     
     public  static String token=PathConstant.TOKEN_GITHUB;
-    public  static String githubToken=PathGitHubConstant.TOKEN_GITHUB;
+    public  static String githubToken=PathConstant.TOKEN_GITHUB;
     public static void main(String[] args) throws Exception{
     
 	
@@ -63,7 +62,7 @@ public class HttpClientUtil {
 			List<NameValuePair> params=new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("name", repoName));
 			params.add(new BasicNameValuePair("Authorization: token", HttpClientUtil.githubToken));
-			hc.executeByPOST(PathGitHubConstant.API_GITHUB_CREATE_REPO, params);
+			hc.executeByPOST(PathConstant.API_GITHUB_CREATE_REPO, params);
     	}catch (Exception e) {
     		Exception e1= new  Exception ("github repo create error:"+e.getMessage());
     		e1.setStackTrace(e.getStackTrace());

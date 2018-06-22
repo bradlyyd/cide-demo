@@ -16,7 +16,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.devops.config.PathConstant;
-import com.devops.config.PathGitHubConstant;
 import com.devops.entity.JenkinsJob;
 import com.devops.entity.Template;
 import com.devops.extraUtil.FreemarkerUtil;
@@ -53,7 +52,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 
 		try {
 			//HttpClientUtil.createGiteeRepo(job.getJobName());
-			GitHub github = GitHub.connect("bradlyyd",PathGitHubConstant.TOKEN_GITHUB);
+			GitHub github = GitHub.connect("bradlyyd",PathConstant.TOKEN_GITHUB);
 			
 			GHCreateRepositoryBuilder g= github.createRepository(job.getJobName());
 			g.create();
