@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.kohsuke.github.GHCreateRepositoryBuilder;
+import org.kohsuke.github.GHRepository;
 import org.kohsuke.github.GitHub;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,6 @@ import com.devops.entity.JenkinsJob;
 import com.devops.entity.Template;
 import com.devops.extraUtil.FreemarkerUtil;
 import com.devops.extraUtil.GitUtil;
-import com.devops.extraUtil.HttpClientUtil;
 import com.devops.extraUtil.JobUtil;
 import com.devops.extraUtil.WorkFlowUtil;
 import com.devops.mapper.JobMapper;
@@ -58,6 +58,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 			g.create();
 			
 			
+			
 			GitUtil.cloneAndPush(tpl.getTemplateName(), job.getJobName());
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -80,7 +81,10 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 		
 		try {
 		JobUtil.batchDel(jobName);
-		HttpClientUtil.deleteGiteeRepo(jobName);
+		//HttpClientUtil.deleteGiteeRepo(jobName);
+		GitHub github = GitHub.connect("bradlyyd",PathConstant.TOKEN_GITHUB);
+		GHRepository  g=github.getRepository(jobName);
+		g.delete();
 		}catch (Exception e) {
 
 			throw e;
