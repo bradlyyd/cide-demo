@@ -19,7 +19,7 @@ public class PathConstant {
 	public static String  GIT_GITHUB_AUTHOR_USER=GIT_AUTHOR_PRE+":"+GIT_USER_NAME+"/";
 	
 	/**
-	 * JENKINS path CONFIG
+	 * JENKINS path CONFIG11
 	 */
 	public static String  JENKINS_SERVER_PATH="http://127.0.0.1:8080/";
 	public static String  JENKINS_SERVER_USER="admin";
