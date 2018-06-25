@@ -45,10 +45,10 @@ public class JobUtil {
     }
     
     public static void getLogTexts(String name ,Integer buildNum)throws Exception {
-    	if(jobs==null) JobUtil.init();
-       String logs=	jobs.getLogText(name, buildNum);
+    //	if(jobs==null) JobUtil.init();
+       //String logs=	jobs.getLogText(name, buildNum);
        
-       System.out.println(logs);
+    //   System.out.println(logs);
     }
     public static void  batchDel(String name) throws Exception
     {
@@ -97,7 +97,7 @@ public class JobUtil {
     }
     public void getLogText(String name) throws IOException
     {
-        jobs.getLogText(name, 1);
+     //   jobs.getLogText(name, 1);
     }
 
     

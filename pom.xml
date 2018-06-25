@@ -44,6 +44,12 @@
     <artifactId>github-api</artifactId>
     <version>1.88</version>
 </dependency>
+<!-- https://mvnrepository.com/artifact/com.surenpi.ci/jenkins.client.java -->
+<dependency>
+    <groupId>com.surenpi.ci</groupId>
+    <artifactId>jenkins.client.java</artifactId>
+    <version>1.0.0-20171218</version>
+</dependency>
 
 
 	
@@ -287,11 +293,7 @@
 		    <artifactId>commons-logging</artifactId>
 		   <version>${commons-logging.version}</version>
 		 </dependency>
-       <dependency>
-		    <groupId>com.devops.tools</groupId>
-		    <artifactId>dcom</artifactId>
-		   <version>0.0.1</version>
-		 </dependency>
+      
 		 <dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
