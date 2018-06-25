@@ -12,7 +12,7 @@ import freemarker.template.TemplateException;
 
 public class FreemarkerUtil {
 	
-	public static String templatePath="e:\\dev_run\\tpl\\";
+	public static String templatePath="/home/tpl/";
 	
 	
 public static void main(String[] args) throws Exception{
