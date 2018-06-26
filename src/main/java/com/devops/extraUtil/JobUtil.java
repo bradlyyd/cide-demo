@@ -6,16 +6,15 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
-
+import com.devops.extraUtil.Jobs;
+import com.devops.extraUtil.Jenkins;
 import org.springframework.scheduling.annotation.Async;
 
 import com.devops.config.PathConstant;
-import com.surenpi.jenkins.client.Jenkins;
 import com.surenpi.jenkins.client.core.JenkinsInfo;
 import com.surenpi.jenkins.client.job.BuildDetail;
 import com.surenpi.jenkins.client.job.Job;
 import com.surenpi.jenkins.client.job.JobDetails;
-import com.surenpi.jenkins.client.job.Jobs;
 
 public class JobUtil {
     private static Jobs jobs;
@@ -45,8 +44,9 @@ public class JobUtil {
     }
     
     public static void getLogTexts(String name ,Integer buildNum)throws Exception {
-    //	if(jobs==null) JobUtil.init();
-       //String logs=	jobs.getLogText(name, buildNum);
+    	if(jobs==null) JobUtil.init();
+    	
+    //   String logs=	jobs.get.getLogText(name, buildNum);
        
     //   System.out.println(logs);
     }
@@ -60,6 +60,17 @@ public class JobUtil {
     		e1.setStackTrace(e.getStackTrace());
     		throw  e1;
     	}
+    }
+    public static void replayPipeline(String name,String xml) throws Exception {
+    	if(jobs==null) JobUtil.init();
+    	try {
+        jobs.create(name, xml);
+    	}catch(Exception e) {
+    		Exception e1=new Exception ("create jenkins job error:"+e.getMessage());
+    		e1.setStackTrace(e.getStackTrace());
+    		throw  e1;
+    	}
+
     }
     public  static void createByXml(String name,String xml) throws Exception
     {

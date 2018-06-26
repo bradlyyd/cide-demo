@@ -28,6 +28,7 @@ public class WorkFlowUtil
 		        new URI(PathConstant.JENKINS_SERVER_PATH),
 		        PathConstant.JENKINS_SERVER_USER,
 		        PathConstant.JENKINS_SERVER_PASSWD).getWorkflows();
+        
     }
   
     public void create() throws IOException
@@ -43,10 +44,10 @@ public class WorkFlowUtil
     {
     	if(workflows==null) WorkFlowUtil.init();
         WfWithDetails desc = workflows.last(name);
-
+       
        return desc.toString();
     }
-
+    
     public void getWfDescribe() throws IOException
     {
         WfWithDetails desc = workflows.getWfDescribe("common", 233);
