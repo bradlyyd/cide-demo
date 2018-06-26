@@ -32,6 +32,10 @@ public class JobUtil {
 				        PathConstant.JENKINS_SERVER_PASSWD).getJobs();
     }
     
+    public static void restarPipeline(String jobName,int buildNum,String stageName)throws Exception{
+    	if(jobs==null) JobUtil.init();
+    	jobs.restartPipeline(jobName, buildNum, stageName);
+    }
     public static BuildDetail  getlastbuildDetail(String jobName)throws  Exception{
     	if(jobs==null) JobUtil.init();
     	return jobs.getLastBuildDetails(jobName);
@@ -46,9 +50,9 @@ public class JobUtil {
     public static void getLogTexts(String name ,Integer buildNum)throws Exception {
     	if(jobs==null) JobUtil.init();
     	
-    //   String logs=	jobs.get.getLogText(name, buildNum);
+      String logs=	jobs.getLogText(name, buildNum);
        
-    //   System.out.println(logs);
+      System.out.println(logs);
     }
     public static void  batchDel(String name) throws Exception
     {
@@ -61,17 +65,7 @@ public class JobUtil {
     		throw  e1;
     	}
     }
-    public static void replayPipeline(String name,String xml) throws Exception {
-    	if(jobs==null) JobUtil.init();
-    	try {
-        jobs.create(name, xml);
-    	}catch(Exception e) {
-    		Exception e1=new Exception ("create jenkins job error:"+e.getMessage());
-    		e1.setStackTrace(e.getStackTrace());
-    		throw  e1;
-    	}
-
-    }
+   
     public  static void createByXml(String name,String xml) throws Exception
     {
     	if(jobs==null) JobUtil.init();
@@ -101,6 +95,7 @@ public class JobUtil {
     	try {
     	if(jobs==null) JobUtil.init();
         jobs.build(name);
+        
     	}catch(Exception e) {
     		e.printStackTrace();
     		

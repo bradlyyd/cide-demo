@@ -20,6 +20,7 @@ public interface IJobService extends IService<JenkinsJob> {
 	public void insertJob(JenkinsJob job,Template tpl)throws Exception ;
 	public void updateJob(JenkinsJob job) throws Exception;
 	void delete(Integer id,String jobName)throws Exception;
+	public void restartPipeline(String jobName,int buildNum,String stageName)throws Exception;
 	void build(JenkinsJob job)throws Exception;
 	public void doBuild(JenkinsJob job);
 	Page<Map<Object, Object>> selectJobList(Page<Map<Object, Object>> page, Map<String ,Object> map);

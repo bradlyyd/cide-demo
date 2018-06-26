@@ -1,6 +1,7 @@
 package com.devops.extraUtil;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -14,8 +15,6 @@ import com.surenpi.jenkins.client.job.Job;
 import com.surenpi.jenkins.client.job.JobDetails;
 import com.surenpi.jenkins.client.util.EncodingUtils;
 import com.surenpi.jenkins.client.util.UrlUtils;
-
-import net.sf.json.JSONObject;
 
 /**
  * You can create, update, del a job through this manager.<br/>
@@ -39,7 +38,16 @@ public class Jobs extends BaseManager
         getClient().postXml(path, jobXml, crumFlag);
     }
     
-  
+    /**
+     * Get log text from a job and buildNum
+     * @param jobName
+     * @param buildNum
+     * @return
+     * @throws IOException
+     */
+    public String getLogText(String jobName, int buildNum) throws IOException {
+        return getClient().get("/job/" + EncodingUtils.encode(jobName) + "/" + buildNum + "/consoleText");
+    }
 
     public void create(FolderJob folderJob, String jobName, String jobXml, boolean crumFlag, boolean createFolder) throws IOException
     {
@@ -312,10 +320,19 @@ public class Jobs extends BaseManager
     {
         getClient().post("/job/" + EncodingUtils.encode(jobName) + "/build", isCrumb());
     }
-   //http://new.cicd.pro:8080/job/aarrrr/5/restart
-    public void replayPipeline(String jobName,int buildNum,String nodeName)throws Exception{
-	  getClient().post("/job/" + EncodingUtils.encode(jobName) +"/"+buildNum +"/restart", isCrumb());
-    }
+    /**
+     * restart a history build from a stageNode
+     * @param jobName
+     * @param buildNum
+     * @param nodeName
+     * @throws Exception
+     */
+    //http://new.cicd.pro:8080/job/aarrrr/5/restart
+    public void restartPipeline(String jobName,int buildNum,String stageName)throws Exception{
+    	 Map <String ,String > data =new HashMap<String,String>();
+    	 data.put("stageName", stageName);
+    	  getClient().postForm("/job/" + EncodingUtils.encode(jobName) +"/"+buildNum +"/restart",data, true);
+        }
 
     /**
      * Build a job with params<br/>

@@ -112,7 +112,7 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 	}
 
 	
-
+	
 	
 	@Override
 	public void build(JenkinsJob job) throws Exception {
@@ -153,6 +153,13 @@ public class JobServiceImpl extends ServiceImpl<JobMapper, JenkinsJob> implement
 	public Page<Map<Object, Object>> selectJobList(Page<Map<Object, Object>> page, Map<String ,Object> search) {
 		page.setRecords(baseMapper.selectJobList(page, search));
 		return page;
+	}
+
+	@Override
+	public void restartPipeline(String jobName, int buildNum, String stageName) throws Exception {
+		
+		JobUtil.restarPipeline(jobName, buildNum, stageName);
+		
 	}
 
 }

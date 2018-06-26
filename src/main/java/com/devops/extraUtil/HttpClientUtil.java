@@ -46,6 +46,7 @@ public class HttpClientUtil {
 	    	HttpClientUtil hc=new HttpClientUtil();
 			List<NameValuePair> params=new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("stageName", "pull"));
+			params.add(new BasicNameValuePair("Jenkins-Crumb","40a30945f70e4e7b36d6c0592895bf8c"));
 			hc.executeByPOST("http://new.cicd.pro:8080/job/aarrrr/1/restart/restart", params);
     	}catch (Exception e) {
     		e.setStackTrace(e.getStackTrace());
