@@ -37,10 +37,21 @@ public class HttpClientUtil {
     public static void main(String[] args) throws Exception{
     
 	
-    	HttpClientUtil.createGiteeRepo("123dsf");
+    	HttpClientUtil.replayPipeline();
 
 	}
     
+    public static void  replayPipeline() throws Exception{
+    	try {
+	    	HttpClientUtil hc=new HttpClientUtil();
+			List<NameValuePair> params=new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("stageName", "pull"));
+			hc.executeByPOST("http://new.cicd.pro:8080/job/aarrrr/1/restart/restart", params);
+    	}catch (Exception e) {
+    		e.setStackTrace(e.getStackTrace());
+    		throw e;
+    	}
+    }
     public static void  createGiteeRepo(String repoName) throws Exception{
     	try {
 	    	HttpClientUtil hc=new HttpClientUtil();

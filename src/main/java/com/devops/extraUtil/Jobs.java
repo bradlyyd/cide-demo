@@ -15,6 +15,8 @@ import com.surenpi.jenkins.client.job.JobDetails;
 import com.surenpi.jenkins.client.util.EncodingUtils;
 import com.surenpi.jenkins.client.util.UrlUtils;
 
+import net.sf.json.JSONObject;
+
 /**
  * You can create, update, del a job through this manager.<br/>
  * 浣犲彲浠ュJenkins鐨勪换鍔″仛鍒涘缓銆佹洿鏂般�佸垹闄ょ殑鎿嶄綔
@@ -36,6 +38,8 @@ public class Jobs extends BaseManager
 
         getClient().postXml(path, jobXml, crumFlag);
     }
+    
+  
 
     public void create(FolderJob folderJob, String jobName, String jobXml, boolean crumFlag, boolean createFolder) throws IOException
     {
@@ -307,6 +311,10 @@ public class Jobs extends BaseManager
     public void build(String jobName) throws IOException
     {
         getClient().post("/job/" + EncodingUtils.encode(jobName) + "/build", isCrumb());
+    }
+   //http://new.cicd.pro:8080/job/aarrrr/5/restart
+    public void replayPipeline(String jobName,int buildNum,String nodeName)throws Exception{
+	  getClient().post("/job/" + EncodingUtils.encode(jobName) +"/"+buildNum +"/restart", isCrumb());
     }
 
     /**
